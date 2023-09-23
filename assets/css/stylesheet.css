@@ -1,0 +1,55 @@
+body{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#main_sec{
+    margin-top: 25%;
+}
+
+p{
+    text-align: center;
+    margin: 0;
+}
+
+#div_sec{
+    display: flex;
+
+}
+
+p{
+    color: red;
+    font-size: 18px;
+}
+
+hr{
+    margin: 5px;
+}
+
+div {
+    width: 50px;
+    height: 30px;
+    margin-left: 5px;
+}
+
+button{
+    width: 50px;
+    height: 20px;
+    margin: 8px;
+    font-size: 12px;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+}
+
+#start{
+    background-color: red;
+
+}
+#stop{
+    background-color: grey;
+    color: white;
+}
