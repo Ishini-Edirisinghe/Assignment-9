@@ -1,46 +1,40 @@
-let lights = $('.light');
-let index=0;
-let direction = 'Right';
+var current_light = -1;
+var current_direction = "RIGHT";
+var light_count = 7;
 
-let key = null;
-var audio = new Audio();
+const updatePanel=()=>{
+    $(".light").css("background", "white");
+    if (current_direction === "RIGHT"){
+        current_light++;
+        $(".light").eq(current_light).css("background", "red");
+        if (current_light-1 >= 0){
+            $(".light").eq(current_light-1).css("background", "pink");
+        }
 
-audio.src="assets/audio/audio.mp3";
-audio.loop=true;
 
-function updateLight(){
-    $('.light').css({background:"white"});
-
-    if(index>0){
-        lights[index-1].style.background="pink";
+        if (current_light === light_count-1){
+            current_direction ="LEFT";
+        }
+    }else {
+        current_light--;
+        $(".light").eq(current_light).css("background", "red");
+        $(".light").eq(current_light+1).css("background", "pink");
+        if (current_light === 0){
+            current_direction = 'RIGHT';
+        }
     }
-
-    lights[index].style.background="red";
-
-    if(index<6){
-        lights[index+1].style.background="pink";
-    }
-
-    if(index===6){
-        direction="Left";
-    }
-
-    if(index===0){
-        direction="Right";
-    }
-
-    direction==="Right" ? index++ : index--;
-
 }
 
-
-
-$('#start').on('click',()=>{
-    key=setInterval(updateLight,500);
-    audio.play();
+let intervalId = null;
+$("#start").on('click', ()=>{
+    if (intervalId === null){
+        intervalId=setInterval(updatePanel,100);
+        $('audio')[0].play();
+    }
 });
 
-$('#stop').on('click',()=>{
-    clearInterval(key);
-    audio.pause();
+$("#stop").on('click', ()=>{
+    clearInterval(intervalId);
+    intervalId = null;
+    $('audio')[0].pause();
 });
